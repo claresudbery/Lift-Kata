@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using ApprovalTests;
+using ApprovalTests.Reporters;
 using Xunit;
 
 namespace Lift
 {
+    [UseReporter(typeof(DiffReporter))]
     public class LiftSystemTest
     {
-        // TODO: enable this test and finish writing it
-        // [Fact]
-        public void Something()
+        [Fact]
+        public void InitialisesSingleLift()
         {
             var liftA = new Lift("A", 0);
             var lifts = new LiftSystem(new List<int>(){0, 1}, new List<Lift>{liftA}, new List<Call>());

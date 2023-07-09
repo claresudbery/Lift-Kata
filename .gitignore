@@ -7,3 +7,4 @@ target
 out/
 build/
 .gradle/
+csharp/Lift.sln.DotSettings.user
