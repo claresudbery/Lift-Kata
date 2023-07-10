@@ -24,7 +24,7 @@ namespace Lift
             Approvals.Verify(new LiftSystemPrinter().Print(liftSystem));
         }
         [Fact]
-        public void IdleLift_FulfilsRequest()
+        public void IdleLift_FulfilsRequest_InTwoTicks()
         {
             // Arrange
             var liftA = new Lift("A", 0, new List<int>(){1});

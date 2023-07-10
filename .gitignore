@@ -9,3 +9,4 @@ build/
 .gradle/
 csharp/Lift.sln.DotSettings.user
 csharp/Lift/LiftSystemTest.IdleLift_FulfilsRequest.received.txt
+csharp/Lift/LiftSystemTest.IdleLift_FulfilsRequest_InTwoTicks.received.txt
