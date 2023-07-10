@@ -11,10 +11,17 @@ namespace Lift
         [Fact]
         public void Initialises_WithTwoFloors_AndSingleLift_AsSpecified()
         {
+            // Arrange
             var liftA = new Lift("A", 0);
-            var lifts = new LiftSystem(new List<int>(){0, 1}, new List<Lift>{liftA}, new List<Call>());
-            lifts.Tick();
-            Approvals.Verify(new LiftSystemPrinter().Print(lifts));
+            var lifts = new List<Lift> { liftA };
+            var floors = new List<int>() { 0, 1 };
+            var calls = new List<Call>();
+            
+            // Act
+            var liftSystem = new LiftSystem(floors, lifts, calls);
+            
+            // Assert
+            Approvals.Verify(new LiftSystemPrinter().Print(liftSystem));
         }
     }
 }
