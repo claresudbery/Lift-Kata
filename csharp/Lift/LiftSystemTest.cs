@@ -30,15 +30,19 @@ namespace Lift
             var liftA = new Lift("A", 0, new List<int>(){1});
             var lifts = new List<Lift> { liftA };
             var floors = new List<int> { 0, 1 };
-            var calls = new List<Call>{new Call(1, Direction.Down)};
+            var calls = new List<Call>();
             var liftSystem = new LiftSystem(floors, lifts, calls);
+            var printer = new LiftSystemPrinter();
             
             // Act
+            var liftSystemOutput = printer.Print(liftSystem);
             liftSystem.Tick();
+            liftSystemOutput = liftSystemOutput + "...\n" + printer.Print(liftSystem);
             liftSystem.Tick();
+            liftSystemOutput = liftSystemOutput + "...\n" + printer.Print(liftSystem);
             
             // Assert
-            Approvals.Verify(new LiftSystemPrinter().Print(liftSystem));
+            Approvals.Verify(liftSystemOutput);
         }
     }
 }
