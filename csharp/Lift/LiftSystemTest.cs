@@ -9,7 +9,7 @@ namespace Lift
     public class LiftSystemTest
     {
         [Fact]
-        public void InitialisesSingleLift()
+        public void Initialises_WithTwoFloors_AndSingleLiftgcam _AsSpecified()
         {
             var liftA = new Lift("A", 0);
             var lifts = new LiftSystem(new List<int>(){0, 1}, new List<Lift>{liftA}, new List<Call>());
