@@ -33,16 +33,22 @@ namespace Lift
             var calls = new List<Call>();
             var liftSystem = new LiftSystem(floors, lifts, calls);
             var printer = new LiftSystemPrinter();
+            var liftSystemOutput = printer.Print(liftSystem);
             
             // Act
-            var liftSystemOutput = printer.Print(liftSystem);
-            liftSystem.Tick();
-            liftSystemOutput = liftSystemOutput + "...\n" + printer.Print(liftSystem);
-            liftSystem.Tick();
-            liftSystemOutput = liftSystemOutput + "...\n" + printer.Print(liftSystem);
+            liftSystemOutput += TickAndReturnOutput(printer, liftSystem);
+            liftSystemOutput += TickAndReturnOutput(printer, liftSystem);
             
             // Assert
             Approvals.Verify(liftSystemOutput);
+        }
+
+        private string TickAndReturnOutput(
+                LiftSystemPrinter printer, 
+                LiftSystem liftSystem)
+        {
+            liftSystem.Tick();
+            return "...\n" + printer.Print(liftSystem);
         }
     }
 }
