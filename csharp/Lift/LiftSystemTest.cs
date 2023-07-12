@@ -23,6 +23,7 @@ namespace Lift
             // Assert
             Approvals.Verify(new LiftSystemPrinter().Print(liftSystem));
         }
+        
         [Fact]
         public void IdleLift_FulfilsRequest_InTwoTicks()
         {
