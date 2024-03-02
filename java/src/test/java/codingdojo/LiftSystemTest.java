@@ -10,8 +10,8 @@ import static org.approvaltests.Approvals.verify;
 public class LiftSystemTest {
 
     // TODO: enable this test and finish writing it
-    // @Test
-    public void doSomething() {
+    @Test
+    public void initialises_withTwoFloors_andSingleLift_asSpecified() {
         Lift liftA = new Lift("A", 0);
         LiftSystem lifts = new LiftSystem(Arrays.asList(0, 1), Collections.singletonList(liftA), Collections.emptyList());
         lifts.tick();
