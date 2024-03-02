@@ -10,7 +10,6 @@ import static org.approvaltests.Approvals.verify;
 
 public class LiftSystemTest {
 
-    // TODO: enable this test and finish writing it
     @Test
     public void initialises_withTwoFloors_andSingleLift_asSpecified() {
         // Arrange
