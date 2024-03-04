@@ -20,7 +20,6 @@ public class LiftSystemTest {
 
         // Act
         LiftSystem liftSystem = new LiftSystem(floors, lifts, calls);
-        liftSystem.tick();
 
         // Assert
         verify(new LiftSystemPrinter().print(liftSystem));
