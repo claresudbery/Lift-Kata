@@ -5,25 +5,26 @@ from lift_printers import print_lifts
 
 
 def test_initialises_with_two_floors_and_single_lift():
-    #Arrange
-    liftA = Lift("A", 0)
+    # Arrange
+    lift_a = Lift("A", 0)
 
-    #Act
-    lifts = LiftSystem(floors=[0, 1], lifts=[liftA])
+    # Act
+    lifts = LiftSystem(floors=[0, 1], lifts=[lift_a])
 
-    #Assert
+    # Assert
     verify(print_lifts(lifts))
 
+
 def test_idle_lift_with_no_request_after_tick_stays_still():
-    #Arrange
-    liftA = Lift("A", 0)
-    lift_system = LiftSystem(floors=[0, 1], lifts=[liftA])
+    # Arrange
+    lift_a = Lift("A", 0)
+    lift_system = LiftSystem(floors=[0, 1], lifts=[lift_a])
     lift_system_output = print_lifts(lift_system)
 
-    #Act
+    # Act
     lift_system_output += tick_and_return_output(lift_system)
 
-    #Assert
+    # Assert
     verify(lift_system_output)
 
 
