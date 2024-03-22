@@ -99,6 +99,23 @@ def test_lift_fulfils_request_opens_doors_clears_request_and_closes_doors():
     verify(lift_system_output)
 
 
+def test_many_lifts_fulfil_requests_open_doors_clear_requests_and_close_doors():
+    # Arrange
+    lift_a = Lift("A", 0, requested_floors=[3])
+    lift_b = Lift("B", 0, requested_floors=[1])
+    lift_c = Lift("C", 0, requested_floors=[4])
+    lift_system = LiftSystem(floors=[0, 1, 2, 3, 4], lifts=[lift_a, lift_b, lift_c])
+    lift_system_output = print_lifts(lift_system)
+
+    # Act
+    lift_system_output += tick_and_return_output(lift_system)
+    lift_system_output += tick_and_return_output(lift_system)
+    lift_system_output += tick_and_return_output(lift_system)
+
+    # Assert
+    verify(lift_system_output)
+
+
 def test_empty_lift_moves_towards_a_waiting_person():
     # Arrange
     lift_a = Lift("A", 1)
