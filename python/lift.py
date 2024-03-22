@@ -44,6 +44,9 @@ class LiftSystem:
             else:
                 lift.doors_open = True
                 lift.requested_floors = []
+        else:
+            lift.doors_open = False
+
         if len(self.calls) > 0:
             if lift.floor != self.calls[0].floor:
                 lift.move_to(self.calls[0].floor)
