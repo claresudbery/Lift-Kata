@@ -84,6 +84,21 @@ def test_lift_that_finished_request_if_no_new_request_closes_doors():
     verify(lift_system_output)
 
 
+def test_lift_fulfils_request_opens_doors_clears_request_and_closes_doors():
+    # Arrange
+    lift_a = Lift("A", 0, requested_floors=[1])
+    lift_system = LiftSystem(floors=[0, 1], lifts=[lift_a])
+    lift_system_output = print_lifts(lift_system)
+
+    # Act
+    lift_system_output += tick_and_return_output(lift_system)
+    lift_system_output += tick_and_return_output(lift_system)
+    lift_system_output += tick_and_return_output(lift_system)
+
+    # Assert
+    verify(lift_system_output)
+
+
 def test_empty_lift_moves_towards_a_waiting_person():
     # Arrange
     lift_a = Lift("A", 1)
@@ -96,6 +111,7 @@ def test_empty_lift_moves_towards_a_waiting_person():
 
     # Assert
     verify(lift_system_output)
+
 
 def tick_and_return_output(lift_system):
     lift_system.tick()
