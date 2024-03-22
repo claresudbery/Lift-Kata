@@ -20,7 +20,10 @@ class Lift:
         self.id = id
         self.floor = floor
         self.doors_open = doors_open
-        self.requested_floors = set(requested_floors) if requested_floors else set()
+        self.requested_floors = list(requested_floors) if requested_floors else []
+
+    def move_to(self, new_floor):
+        self.floor = new_floor
 
 
 class LiftSystem:
@@ -33,7 +36,14 @@ class LiftSystem:
         return [c for c in self.calls if c.floor == floor]
 
     def tick(self):
-        # TODO: implement this method
-        pass
-
-
+        lift = self.lifts[0]
+        if lift.requested_floors:
+            request = lift.requested_floors[0]
+            if lift.floor != request:
+                lift.move_to(request)
+            else:
+                lift.doors_open = True
+                lift.requested_floors = []
+        if len(self.calls) > 0:
+            if lift.floor != self.calls[0].floor:
+                lift.move_to(self.calls[0].floor)
