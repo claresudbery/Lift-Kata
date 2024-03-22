@@ -89,6 +89,12 @@ class LiftSystem:
                 lift.doors_open = True
                 lift.requested_floors = []
 
+    def tick_many_lifts_move_to_floor(self):
+        for lift in self.lifts:
+            if lift.requested_floors:
+                request = lift.requested_floors[0]
+                lift.move_to(request)
+
     def tick_move_to_floor(self):
         lift = self.lifts[0]
         if lift.requested_floors:

@@ -45,6 +45,25 @@ def test_idle_lift_with_request_after_tick_moves_to_requested_floor():
     verify(lift_system_output)
 
 
+def test_many_lifts_with_requests_after_tick_move_to_requested_floors():
+    # Arrange
+    lift_a = Lift("A", 0, requested_floors=[1])
+    lift_b = Lift("B", 0, requested_floors=[2])
+    lift_c = Lift("C", 0, requested_floors=[3])
+    floors = [0, 1, 2, 3]
+    lifts = [lift_a, lift_b, lift_c]
+    lift_system = LiftSystem(floors=floors, lifts=lifts)
+    lift_system_output = print_lifts(lift_system)
+
+    # Act
+    lift_system.tick_many_lifts_move_to_floor()
+    lift_system_output += "...\n" + print_lifts(lift_system)
+    # lift_system_output += tick_and_return_output(lift_system)
+
+    # Assert
+    verify(lift_system_output)
+
+
 def test_idle_lift_that_moved_to_floor_after_tick_opens_doors_and_clears_request():
     # Arrange
     lift_a = Lift("A", 1, requested_floors=[1])
