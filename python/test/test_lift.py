@@ -15,6 +15,21 @@ def test_initialises_with_two_floors_and_single_lift():
     verify(print_lifts(lifts))
 
 
+def test_idle_lift_with_no_request_after_tick_stays_still():
+    # Arrange
+    lift_a = Lift("A", 0)
+    lift_system = LiftSystem(floors=[0, 1], lifts=[lift_a])
+    lift_system_output = print_lifts(lift_system)
+
+    # Act
+    lift_system.tick()
+    lift_system_output += "...\n" + print_lifts(lift_system)
+    # lift_system_output += tick_and_return_output(lift_system)
+
+    # Assert
+    verify(lift_system_output)
+
+
 def test_idle_lift_with_request_after_tick_moves_to_requested_floor():
     # Arrange
     lift_a = Lift("A", 0, requested_floors=[1])
