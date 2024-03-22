@@ -36,58 +36,58 @@ class LiftSystem:
         return [c for c in self.calls if c.floor == floor]
 
     def tick(self):
-        lift = self.lifts[0]
-        if lift.requested_floors:
-            request = lift.requested_floors[0]
-            if lift.floor != request:
-                lift.move_to(request)
+        for lift in self.lifts:
+            if lift.requested_floors:
+                request = lift.requested_floors[0]
+                if lift.floor != request:
+                    lift.move_to(request)
+                else:
+                    lift.doors_open = True
+                    lift.requested_floors = []
             else:
-                lift.doors_open = True
-                lift.requested_floors = []
-        else:
-            lift.doors_open = False
+                lift.doors_open = False
 
-        if len(self.calls) > 0:
-            if lift.floor != self.calls[0].floor:
-                lift.move_to(self.calls[0].floor)
+            if len(self.calls) > 0:
+                if lift.floor != self.calls[0].floor:
+                    lift.move_to(self.calls[0].floor)
 
     def tick_fulfil_requests_and_calls(self):
-        lift = self.lifts[0]
-        if lift.requested_floors:
-            request = lift.requested_floors[0]
-            if lift.floor != request:
-                lift.move_to(request)
+        for lift in self.lifts:
+            if lift.requested_floors:
+                request = lift.requested_floors[0]
+                if lift.floor != request:
+                    lift.move_to(request)
+                else:
+                    lift.doors_open = True
+                    lift.requested_floors = []
             else:
-                lift.doors_open = True
-                lift.requested_floors = []
-        else:
-            lift.doors_open = False
+                lift.doors_open = False
 
-        if len(self.calls) > 0:
-            if lift.floor != self.calls[0].floor:
-                lift.move_to(self.calls[0].floor)
+            if len(self.calls) > 0:
+                if lift.floor != self.calls[0].floor:
+                    lift.move_to(self.calls[0].floor)
 
     def tick_open_doors_and_clear_request_and_close_doors(self):
-        lift = self.lifts[0]
-        if lift.requested_floors:
-            request = lift.requested_floors[0]
-            if lift.floor != request:
-                lift.move_to(request)
+        for lift in self.lifts:
+            if lift.requested_floors:
+                request = lift.requested_floors[0]
+                if lift.floor != request:
+                    lift.move_to(request)
+                else:
+                    lift.doors_open = True
+                    lift.requested_floors = []
             else:
-                lift.doors_open = True
-                lift.requested_floors = []
-        else:
-            lift.doors_open = False
+                lift.doors_open = False
 
     def tick_open_doors_and_clear_request(self):
-        lift = self.lifts[0]
-        if lift.requested_floors:
-            request = lift.requested_floors[0]
-            if lift.floor != request:
-                lift.move_to(request)
-            else:
-                lift.doors_open = True
-                lift.requested_floors = []
+        for lift in self.lifts:
+            if lift.requested_floors:
+                request = lift.requested_floors[0]
+                if lift.floor != request:
+                    lift.move_to(request)
+                else:
+                    lift.doors_open = True
+                    lift.requested_floors = []
 
     def tick_many_lifts_move_to_floor(self):
         for lift in self.lifts:
