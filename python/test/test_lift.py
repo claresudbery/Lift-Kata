@@ -22,7 +22,7 @@ def test_idle_lift_with_no_request_after_tick_stays_still():
     lift_system_output = print_lifts(lift_system)
 
     # Act
-    lift_system.tick()
+    lift_system.tick_unimplemented()
     lift_system_output += "...\n" + print_lifts(lift_system)
     # lift_system_output += tick_and_return_output(lift_system)
 
@@ -37,7 +37,7 @@ def test_idle_lift_with_request_after_tick_moves_to_requested_floor():
     lift_system_output = print_lifts(lift_system)
 
     # Act
-    lift_system.tick()
+    lift_system.tick_move_to_floor()
     lift_system_output += "...\n" + print_lifts(lift_system)
     # lift_system_output += tick_and_return_output(lift_system)
 
@@ -52,7 +52,7 @@ def test_idle_lift_that_moved_to_floor_after_tick_opens_doors_and_clears_request
     lift_system_output = print_lifts(lift_system)
 
     # Act
-    lift_system.tick()
+    lift_system.tick_open_doors_and_clear_request()
     lift_system_output += "...\n" + print_lifts(lift_system)
     # lift_system_output += tick_and_return_output(lift_system)
 
@@ -67,7 +67,7 @@ def test_lift_that_finished_request_if_no_new_request_closes_doors():
     lift_system_output = print_lifts(lift_system)
 
     # Act
-    lift_system.tick()
+    lift_system.tick_open_doors_and_clear_request_and_close_doors()
     lift_system_output += "...\n" + print_lifts(lift_system)
     # lift_system_output += tick_and_return_output(lift_system)
 
@@ -83,7 +83,7 @@ def test_empty_lift_moves_towards_a_waiting_person():
     lift_system_output = print_lifts(lift_system)
 
     # Act
-    lift_system.tick()
+    lift_system.tick_fulfil_requests_and_calls()
     lift_system_output += "...\n" + print_lifts(lift_system)
     # lift_system_output += tick_and_return_output(lift_system)
 

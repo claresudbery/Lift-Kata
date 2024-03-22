@@ -50,3 +50,51 @@ class LiftSystem:
         if len(self.calls) > 0:
             if lift.floor != self.calls[0].floor:
                 lift.move_to(self.calls[0].floor)
+
+    def tick_fulfil_requests_and_calls(self):
+        lift = self.lifts[0]
+        if lift.requested_floors:
+            request = lift.requested_floors[0]
+            if lift.floor != request:
+                lift.move_to(request)
+            else:
+                lift.doors_open = True
+                lift.requested_floors = []
+        else:
+            lift.doors_open = False
+
+        if len(self.calls) > 0:
+            if lift.floor != self.calls[0].floor:
+                lift.move_to(self.calls[0].floor)
+
+    def tick_open_doors_and_clear_request_and_close_doors(self):
+        lift = self.lifts[0]
+        if lift.requested_floors:
+            request = lift.requested_floors[0]
+            if lift.floor != request:
+                lift.move_to(request)
+            else:
+                lift.doors_open = True
+                lift.requested_floors = []
+        else:
+            lift.doors_open = False
+
+    def tick_open_doors_and_clear_request(self):
+        lift = self.lifts[0]
+        if lift.requested_floors:
+            request = lift.requested_floors[0]
+            if lift.floor != request:
+                lift.move_to(request)
+            else:
+                lift.doors_open = True
+                lift.requested_floors = []
+
+    def tick_move_to_floor(self):
+        lift = self.lifts[0]
+        if lift.requested_floors:
+            request = lift.requested_floors[0]
+            lift.move_to(request)
+
+    def tick_unimplemented(self):
+        # TODO: implement this method
+        pass
