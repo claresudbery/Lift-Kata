@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using ApprovalTests.Reporters.Windows;
 using Xunit;
 
 namespace Lift
@@ -9,7 +10,7 @@ namespace Lift
     public class LiftSystemTest
     {
         [Fact]
-        public void Initialises_WithTwoFloors_AndSingleLift_AsSpecified()
+        public void Initialises_WithTwoFloors_AndSingleLift()
         {
             // Arrange
             var liftA = new Lift("A", 0);
