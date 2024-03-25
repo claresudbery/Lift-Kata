@@ -47,5 +47,82 @@ namespace Lift
                 }
             }
         }
+
+        public void TickFulfilRequestsAndCalls()
+        {
+            foreach (var lift in Lifts)
+            {
+                lift.FulFilRequestsOrCloseDoors();
+                if (Calls.Count > 0)
+                {
+                    if (lift.Floor != Calls[0].Floor)
+                    {
+                        lift.MoveTo(Calls[0].Floor);
+                    }
+                }
+            }
+        }
+
+        public void TickOpenDoorsAndClearRequestAndCloseDoors()
+        {
+            foreach (var lift in Lifts)
+            {
+                if (lift.Requests.Count > 0)
+                {
+                    lift.FulfilRequests();
+                }
+                else
+                {
+                    lift.CloseDoors();
+                }
+            }
+        }
+
+        public void TickOpenDoorsAndClearRequest()
+        {
+            foreach (var lift in Lifts)
+            {
+                if (lift.Requests.Count > 0)
+                {
+                    var request = lift.Requests[0];
+                    if (lift.Floor != request)
+                    {
+                        lift.MoveTo(request);
+                    }
+                    else
+                    {
+                        lift.Requests.RemoveAt(0);
+                        lift.OpenDoors();
+                    }
+                }
+            }
+        }
+
+        public void TickManyLiftsMoveToFloor()
+        {
+            foreach (var lift in Lifts)
+            {
+                if (lift.Requests.Count > 0)
+                {
+                    var request = lift.Requests[0];
+                    lift.MoveTo(request);
+                }
+            }
+        }
+
+        public void TickMoveToFloor()
+        {
+            var lift = Lifts[0];
+            if (lift.Requests.Count > 0)
+            {
+                var request = lift.Requests[0];
+                lift.MoveTo(request);
+            }
+        }
+
+        public void TickUnimplemented()
+        {
+            // TODO: implement this method
+        }
     }
 }

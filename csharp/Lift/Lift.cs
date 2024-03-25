@@ -54,7 +54,7 @@ namespace Lift
             }
         }
 
-        private void FulfilRequests()
+        public void FulfilRequests()
         {
             var request = Requests[0];
             if (Floor != request)
