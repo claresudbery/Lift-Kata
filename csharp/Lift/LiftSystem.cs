@@ -30,7 +30,21 @@ namespace Lift
 
         public void Tick()
         {
-            // TODO: Implement this method
+            // foreach (var lift in Lifts)
+            // {
+            //     if (lift.Requests.Count > 0)
+            //     {
+            //         if (lift.Floor != lift.Requests[0])
+            //         {
+            //             lift.MoveTo(lift.Requests[0]);
+            //         }
+            //         else
+            //         {
+            //             lift.Requests.RemoveAt(0);
+            //             lift.OpenDoors();
+            //         }
+            //     }
+            // }
         }
     }
 }

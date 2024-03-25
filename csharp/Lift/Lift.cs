@@ -6,9 +6,9 @@ namespace Lift
     public class Lift
     {
         public string Id { get; }
-        public int Floor { get; }
+        public int Floor { get; private set; }
         public List<int> Requests { get; }
-        public bool DoorsOpen { get; }
+        public bool DoorsOpen { get; private set; }
 
         public Lift(string id, int floor, List<int> requests, bool doorsOpen = false)
         {
@@ -25,6 +25,16 @@ namespace Lift
         public bool HasRequestForFloor(int floor)
         {
             return Requests.Contains(floor);
+        }
+
+        public void MoveTo(int newFloor)
+        {
+            Floor = newFloor;
+        }
+
+        public void OpenDoors()
+        {
+            DoorsOpen = true;
         }
     }
 }
