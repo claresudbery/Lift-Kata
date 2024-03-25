@@ -36,5 +36,36 @@ namespace Lift
         {
             DoorsOpen = true;
         }
+
+        public void CloseDoors()
+        {
+            DoorsOpen = false;
+        }
+
+        public void FulFilRequestsOrCloseDoors()
+        {
+            if (Requests.Count > 0)
+            {
+                FulfilRequests();
+            }
+            else
+            {
+                CloseDoors();
+            }
+        }
+
+        private void FulfilRequests()
+        {
+            var request = Requests[0];
+            if (Floor != request)
+            {
+                MoveTo(request);
+            }
+            else
+            {
+                Requests.RemoveAt(0);
+                OpenDoors();
+            }
+        }
     }
 }
