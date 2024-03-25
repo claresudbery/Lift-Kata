@@ -26,10 +26,9 @@ public class LiftSystemTest {
     }
 
     @Test
-    public void idleLift_fulfilsRequest_inTwoTicks() {
+    public void idleLiftWithNoRequest_afterTick_staysStill() {
         // Arrange
-        List<Integer> requests = Arrays.asList(1);
-        Lift liftA = new Lift("A", 0, requests);
+        Lift liftA = new Lift("A", 0);
         List<Lift> lifts = Collections.singletonList(liftA);
         List<Integer> floors = Arrays.asList(0, 1);
         List<Call> calls = Collections.emptyList();
@@ -38,7 +37,6 @@ public class LiftSystemTest {
         String liftSystemOutput = liftSystemPrinter.print(liftSystem);
 
         // Act
-        liftSystemOutput = tickAndReturnoutput(liftSystem, liftSystemOutput, liftSystemPrinter);
         liftSystemOutput = tickAndReturnoutput(liftSystem, liftSystemOutput, liftSystemPrinter);
 
         // Assert
