@@ -26,10 +26,10 @@ namespace Lift
         }
         
         [Fact]
-        public void IdleLift_FulfilsRequest_InTwoTicks()
+        public void IdleLiftWithNoRequest_AfterTick_StaysStill()
         {
             // Arrange
-            var liftA = new Lift("A", 0, new List<int>(){1});
+            var liftA = new Lift("A", 0);
             var lifts = new List<Lift> { liftA };
             var floors = new List<int> { 0, 1 };
             var calls = new List<Call>();
@@ -38,7 +38,6 @@ namespace Lift
             var liftSystemOutput = printer.Print(liftSystem);
             
             // Act
-            liftSystemOutput += TickAndReturnOutput(printer, liftSystem);
             liftSystemOutput += TickAndReturnOutput(printer, liftSystem);
             
             // Assert
