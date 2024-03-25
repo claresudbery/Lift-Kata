@@ -11,7 +11,7 @@ import static org.approvaltests.Approvals.verify;
 public class LiftSystemTest {
 
     @Test
-    public void initialises_withTwoFloors_andSingleLift_asSpecified() {
+    public void initialises_withTwoFloors_andSingleLift() {
         // Arrange
         Lift liftA = new Lift("A", 0);
         List<Lift> lifts = Collections.singletonList(liftA);
