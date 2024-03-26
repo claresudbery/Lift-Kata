@@ -38,8 +38,7 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickUnimplemented();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -57,8 +56,7 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickMoveToFloor();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -78,8 +76,7 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickManyLiftsMoveToFloor();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -98,8 +95,7 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickOpenDoorsAndClearRequest();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -117,10 +113,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickOpenDoorsAndClearRequest();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
-        liftSystem.tickOpenDoorsAndClearRequest();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -138,8 +132,7 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -157,12 +150,9 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -182,12 +172,9 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
-        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -205,8 +192,7 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystem.tickFulfilRequestsAndCalls();
-        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
 
         // Assert
         verify(liftSystemOutput);
