@@ -2,6 +2,7 @@ package codingdojo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +38,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickUnimplemented();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -46,7 +48,7 @@ public class LiftSystemTest {
     @Test
     public void idleLiftWithRequest_afterTick_movesToRequestedFloor() {
         // Arrange
-        Lift liftA = new Lift("A", 0, Arrays.asList(1));
+        Lift liftA = new Lift("A", 0, new ArrayList<>(Arrays.asList(1)));
         List<Lift> lifts = Collections.singletonList(liftA);
         List<Integer> floors = Arrays.asList(0, 1);
         List<Call> calls = Collections.emptyList();
@@ -55,7 +57,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickMoveToFloor();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -64,9 +67,9 @@ public class LiftSystemTest {
     @Test
     public void manyLiftsWithRequests_afterTick_moveToRequestedFloors() {
         // Arrange
-        Lift liftA = new Lift("A", 0, Arrays.asList(1));
-        Lift liftB = new Lift("B", 0, Arrays.asList(2));
-        Lift liftC = new Lift("C", 0, Arrays.asList(3));
+        Lift liftA = new Lift("A", 0, new ArrayList<>(Arrays.asList(1)));
+        Lift liftB = new Lift("B", 0, new ArrayList<>(Arrays.asList(2)));
+        Lift liftC = new Lift("C", 1, new ArrayList<>(Arrays.asList(3)));
         List<Lift> lifts = Arrays.asList(liftA, liftB, liftC);
         List<Integer> floors = Arrays.asList(0, 1, 2, 3);
         List<Call> calls = Collections.emptyList();
@@ -75,7 +78,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickManyLiftsMoveToFloor();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -85,7 +89,7 @@ public class LiftSystemTest {
     public void idleLift_thatMovedToFloorAfterTick_opensDoorsAndClearsRequest() {
         // Arrange
         int requestFloor = 1;
-        Lift liftA = new Lift("A", requestFloor, Arrays.asList(requestFloor));
+        Lift liftA = new Lift("A", requestFloor, new ArrayList<>(Arrays.asList(requestFloor)));
         List<Lift> lifts = Collections.singletonList(liftA);
         List<Integer> floors = Arrays.asList(0, 1);
         List<Call> calls = Collections.emptyList();
@@ -94,7 +98,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequest();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -103,7 +108,7 @@ public class LiftSystemTest {
     @Test
     public void liftWithRequest_afterTwoTicks_movesToFloor_clearsRequest_andOpensDoors() {
         // Arrange
-        Lift liftA = new Lift("A", 0, Arrays.asList(1));
+        Lift liftA = new Lift("A", 0, new ArrayList<>(Arrays.asList(1)));
         List<Lift> lifts = Collections.singletonList(liftA);
         List<Integer> floors = Arrays.asList(0, 1);
         List<Call> calls = Collections.emptyList();
@@ -112,8 +117,10 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequest();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequest();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -122,7 +129,7 @@ public class LiftSystemTest {
     @Test
     public void liftThatFinishedRequest_ifNoNewRequest_closesDoors() {
         // Arrange
-        Lift liftA = new Lift("A", 0, Arrays.asList(), true);
+        Lift liftA = new Lift("A", 1, new ArrayList<>(Arrays.asList()), true);
         List<Lift> lifts = Collections.singletonList(liftA);
         List<Integer> floors = Arrays.asList(0, 1);
         List<Call> calls = Collections.emptyList();
@@ -131,7 +138,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -140,7 +148,7 @@ public class LiftSystemTest {
     @Test
     public void lift_fulfilsRequest_opensDoors_clearsRequest_andClosesDoors() {
         // Arrange
-        Lift liftA = new Lift("A", 0, Arrays.asList());
+        Lift liftA = new Lift("A", 0, new ArrayList<>(Arrays.asList(1)));
         List<Lift> lifts = Collections.singletonList(liftA);
         List<Integer> floors = Arrays.asList(0, 1);
         List<Call> calls = Collections.emptyList();
@@ -149,9 +157,12 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -160,9 +171,9 @@ public class LiftSystemTest {
     @Test
     public void manyLifts_fulfilRequests_openDoors_clearRequests_andCloseDoors() {
         // Arrange
-        Lift liftA = new Lift("A", 0, Arrays.asList(3));
-        Lift liftB = new Lift("B", 0, Arrays.asList(1));
-        Lift liftC = new Lift("C", 0, Arrays.asList(4));
+        Lift liftA = new Lift("A", 0, new ArrayList<>(Arrays.asList(3)));
+        Lift liftB = new Lift("B", 0, new ArrayList<>(Arrays.asList(1)));
+        Lift liftC = new Lift("C", 0, new ArrayList<>(Arrays.asList(4)));
         List<Lift> lifts = Arrays.asList(liftA, liftB, liftC);
         List<Integer> floors = Arrays.asList(0, 1, 2, 3, 4);
         List<Call> calls = Collections.emptyList();
@@ -171,9 +182,12 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
+        liftSystem.tickOpenDoorsAndClearRequestAndCloseDoors();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);
@@ -191,7 +205,8 @@ public class LiftSystemTest {
         String liftSystemOutput = printer.print(liftSystem);
 
         // Act
-        liftSystemOutput += tickAndReturnOutput(printer, liftSystem);
+        liftSystem.tickFulfilRequestsAndCalls();
+        liftSystemOutput += "...\n" + printer.print(liftSystem);
 
         // Assert
         verify(liftSystemOutput);

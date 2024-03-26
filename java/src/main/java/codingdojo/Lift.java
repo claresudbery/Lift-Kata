@@ -1,13 +1,12 @@
 package codingdojo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lift {
     private final String id;
     private int floor;
-    private List<Integer> requests;
+    public List<Integer> requests;
     private boolean doorsOpen;
 
     public Lift(String id, int floor, List<Integer> requests, boolean doorsOpen) {
@@ -44,5 +43,35 @@ public class Lift {
 
     public boolean areDoorsOpen() {
         return doorsOpen;
+    }
+
+    public void moveTo(Integer newFloor) {
+        floor = newFloor;
+    }
+
+    public void openDoors() {
+        doorsOpen = true;
+    }
+
+    public void closeDoors() {
+        doorsOpen = false;
+    }
+
+    public void fulFilRequestsOrCloseDoors() {
+        if (requests.size() > 0) {
+            fulfilRequests();
+        } else {
+            closeDoors();
+        }
+    }
+
+    public void fulfilRequests() {
+        var request = requests.get(0);
+        if (getFloor() != request) {
+            moveTo(request);
+        } else {
+            requests.remove(0);
+            openDoors();
+        }
     }
 }
