@@ -206,8 +206,8 @@ namespace Lift
         }
 
         private string TickAndReturnOutput(
-                LiftSystemPrinter printer, 
-                LiftSystem liftSystem)
+            LiftSystemPrinter printer,
+            LiftSystem liftSystem)
         {
             liftSystem.Tick();
             return "...\n" + printer.Print(liftSystem);
